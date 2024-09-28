@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>piki widget test</title>
+    <style>
+
+
+
+    .flex-container {
+    display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+                   }
+
+
+    .dentro {
+      background-color: white;
+      width: 125px;
+      overflow-x: hidden;
+     
+    }
+
+
+    
+
+    .post {
+        margin: 5px;
+        border-bottom: 1px solid black;
+        
+    }
+
+    .post-content {font-size: 13px;}
+
+    .post-timestamp {font-size: 11px; text-align: right; margin-bottom: 5px;}
+   
+
+    </style>
+    </head>
+    <body>
+
+   
+
+        
+            <div class="flex-container">
+            <div class="dentro" id="dentro"></div>
+            </div>
+        
+
+  
+    </body>
+</html>
+<script>
+    // Fetch posts from the API
+    fetch('https://pikidiary.lol/api/posts/desudick')
+            .then(response => response.json())
+            .then(data => {
+                const postsContainer = document.getElementById('dentro');
+
+                data.forEach(post => {
+                    // Create a post element
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('post');
+
+                    // Add content to the post element
+                    postElement.innerHTML = `
+                        <div class="post-content">${post.content}</div>
+                        <div class="post-timestamp">${post.created_at}</div>
+                    `;
+
+                    // Append the post element to the container
+                    postsContainer.appendChild(postElement);
+                });
+            })
+            .catch(error => console.error('Error fetching posts:', error));
+</script>
